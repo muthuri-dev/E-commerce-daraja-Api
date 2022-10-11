@@ -4,6 +4,7 @@
   "description": "making an e-commerce website server",
   "main": "connection.js",
   "scripts": {
+    "dev":"nodemon ./connection.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kennedy muthuri",
