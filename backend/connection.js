@@ -10,7 +10,10 @@ const PORT= 8080;
 const app =express();
 
 //database
-const monhoURL= 'mongodb://0.0.0.0/Ecommerce';
+const monhoURL= 'mongodb://0.0.0.0/Darmaris';
+
+//database schemas
+const admin= require('./models/schema');
 
 //middlewares
 app.use(bodyParser.json());
@@ -34,7 +37,18 @@ mongoose.connect(monhoURL)
 
 
 //application Routes
-
+//admin login route
+app.post('/login',async function(req,res){
+    const user= admin.findOne({
+        email:req.body.email,
+        password:req.body.password,
+    });
+    if(user){
+        return res.json({status:'ok', user:true});
+    }else{
+        return res.json({status:'error', user:false});
+    }
+});
 
 //getting all route.
 app.get('/',function(req,res){
