@@ -13,4 +13,61 @@ const adminSchema= new schema(
     }
 );
 const admin= mongoose.model('admin', adminSchema);
-module.exports=admin;
+
+const electSchema= new schema({
+    image:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    price:{
+        type:String,
+        required:true
+    }
+});
+
+const electronics= mongoose.model('electronics',electSchema);
+
+const fashionSchema= new schema({
+    image:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    price:{
+        type:String,
+        required:true
+    }
+});
+
+const fashions= mongoose.model('fashions',fashionSchema);
+
+const farnitureSchema= new schema({
+    image:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    price:{
+        type:String,
+        required:true
+    }
+});
+
+const farniture= mongoose.model('farniture',farnitureSchema);
+module.exports={
+    electronics,
+    fashions,
+    admin,
+    farniture
+}
+
