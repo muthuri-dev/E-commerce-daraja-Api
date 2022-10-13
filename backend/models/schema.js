@@ -50,8 +50,8 @@ const fashions= mongoose.model('fashions',fashionSchema);
 
 const farnitureSchema= new schema({
     image:{
-        type:String,
-        required:true
+        data:Buffer,
+        contentType:String,
     },
     description:{
         type:String,

@@ -36,16 +36,14 @@ mongoose.connect(monhoURL)
 });
 
 //multer file upload middleware
-const storage= multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,'/assets');
-    },
+const Storage= multer.diskStorage({
+    destination:'./assets',
     filename:(req,file,cb)=>{
         cb(null,file.originalname);
     }
 });
 
-const upload=multer({storage:storage});
+const upload=multer({storage:Storage}).single('image');
 
 
 //application Routes
@@ -68,7 +66,7 @@ app.get('/',function(req,res){
 });
 
 //posting electronics to the database.
-app.post('/electronics',upload.single('image'), function(req,res){
+app.post('/electronics',upload, function(req,res){
     const electronicAdd= new electronics({
         image:req.file.filename,
         description:req.body.description,
@@ -85,7 +83,7 @@ app.post('/electronics',upload.single('image'), function(req,res){
 
 
 //posting fashion to the database.
-app.post('/fashions',upload.single('image'), function(req,res){
+app.post('/fashions',upload, function(req,res){
     const fashionAdd= new fashions({
         image:req.file.filename,
         description:req.body.description,
@@ -102,19 +100,25 @@ app.post('/fashions',upload.single('image'), function(req,res){
 
 
 //posting furniture to the database.
-app.post('/furniture',upload.single('image'), function(req,res){
-    const furnitureAdd= new farniture({
-        image:req.file.filename,
-        description:req.body.description,
-        price:req.body.price
-    });
-    furnitureAdd.save(function(err){
-        if(!err){
-            console.log({furnitureAdd});
+app.post('/furniture', function(req,res){
+    upload(req,res,function(err){
+        if(err){
+            console.log('multer upload error: ',err);
         }else{
-            console.log('electronic add error: ',err);
+            const furnitureAdd= new farniture({
+                image:req.file.filename,
+                description:req.body.description,
+                price:req.body.price
+            });
+            furnitureAdd.save(function(err){
+                if(!err){
+                    console.log({furnitureAdd});
+                }else{
+                    console.log('electronic add error: ',err);
+                }
+            });
         }
-    });
+    })
 });
 
 //get all the furnitures route
