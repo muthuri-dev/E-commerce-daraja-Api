@@ -79,7 +79,7 @@ const Navbar = () => {
                         </ListItemIcon>
                         <ListItemText>Fashion</ListItemText>
                     </ListItemButton>
-                    <ListItemButton divider>
+                    <ListItemButton divider onClick={()=>navigate('/furnitures')}>
                         <ListItemIcon>
                             <ChairOutlinedIcon/>
                         </ListItemIcon>

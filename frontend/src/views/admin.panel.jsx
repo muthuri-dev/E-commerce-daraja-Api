@@ -1,5 +1,6 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import axios from "axios";
 
 
 const Stock = () => {
@@ -19,6 +20,20 @@ const Stock = () => {
     const handleElect = function(e){
         e.preventDefault();
         console.log({electImage,electDesc,electPrice});
+        const electronics=({
+            image:electImage,
+            description:electDesc,
+            price:electPrice,
+        });
+        axios.post('http://localhost:8080/electronics/',electronics)
+        .then(function(response){
+            if(response.status===200){
+                alert('saved');
+            }
+        })
+        .catch(function(err){
+            console.log('electronics error: ',err);
+        });
     }
     const[fashImage, setFashImage]= useState('');
     const[fashDesc, setFashDesc]= useState('');
@@ -36,6 +51,20 @@ const Stock = () => {
     const handleFash = function(e){
         e.preventDefault();
         console.log({fashImage,fashDesc,fashPrice});
+        const fashions=({
+            image:fashImage,
+            description:fashDesc,
+            price:fashPrice,
+        });
+        axios.post('http://localhost:8080/fashions/',fashions)
+        .then(function(response){
+            if(response.status===200){
+                alert('saved');
+            }
+        })
+        .catch(function(err){
+            console.log('fashions error: ',err);
+        });
     }
 
     const[farImage, setFarImage]= useState('');
@@ -54,6 +83,21 @@ const Stock = () => {
     const handleFar= function(e){
         e.preventDefault();
         console.log({farImage,farDesc,farPrice});
+        const furnatures=({
+            image:farImage,
+            description:farDesc,
+            price:farPrice,
+        });
+        axios.post('http://localhost:8080/furniture/',furnatures)
+        .then(function(response){
+            if(response.status===200){
+                alert('saved');
+                console.log(response);
+            }
+        })
+        .catch(function(err){
+            console.log('furnature error: ',err);
+        });
     }
     return ( 
         <div>
@@ -68,7 +112,7 @@ const Stock = () => {
                             <TextField
                                 variant="outlined"
                                 label=''
-                                type='file'
+                                type='file'required
                                 sx={{marginTop:4,width:300}}
                                 value={electImage}
                                 onChange={handleElectImage}
@@ -76,7 +120,7 @@ const Stock = () => {
                             <TextField
                                 variant="outlined"
                                 label='Description'
-                                type='text'
+                                type='text'required
                                 sx={{marginTop:4,width:300}}
                                 value={electDesc}
                                 onChange={handleElectDesc}
@@ -84,7 +128,7 @@ const Stock = () => {
                             <TextField
                                 variant="outlined"
                                 label='Price'
-                                type='text'
+                                type='text'required
                                 sx={{marginTop:4,width:300}}
                                 value={electPrice}
                                 onChange={handleElectPrice}
@@ -100,7 +144,7 @@ const Stock = () => {
                             <TextField
                                 variant="outlined"
                                 label=''
-                                type='file'
+                                type='file'required
                                 sx={{marginTop:4,width:300}}
                                 value={fashImage}
                                 onChange={handleFashImage}
@@ -108,7 +152,7 @@ const Stock = () => {
                             <TextField
                                 variant="outlined"
                                 label='Description'
-                                type='text'
+                                type='text' required
                                 sx={{marginTop:4,width:300}}
                                 value={fashDesc}
                                 onChange={handleFashDesc}
@@ -116,7 +160,7 @@ const Stock = () => {
                             <TextField
                                 variant="outlined"
                                 label='Price'
-                                type='text'
+                                type='text' required
                                 sx={{marginTop:4,width:300}}
                                 value={fashPrice}
                                 onChange={handleFashPrice}
@@ -128,11 +172,11 @@ const Stock = () => {
                     </Grid>
                     <Grid item>
                         <Typography color='primary'sx={{marginTop:4}}>FURNITURE</Typography>
-                        <form>
+                        <form enctype="multipart/form-data">
                             <TextField
                                 variant="outlined"
                                 label=''
-                                type='file'
+                                type='file' required
                                 sx={{marginTop:4,width:300}}
                                 value={farImage}
                                 onChange={handleFarImage}
@@ -140,7 +184,7 @@ const Stock = () => {
                             <TextField
                                 variant="outlined"
                                 label='Description'
-                                type='text'
+                                type='text' required
                                 sx={{marginTop:4,width:300}}
                                 value={farDesc}
                                 onChange={handleFarDesc}
@@ -148,7 +192,7 @@ const Stock = () => {
                             <TextField
                                 variant="outlined"
                                 label='Price'
-                                type='text'
+                                type='text' required
                                 sx={{marginTop:4,width:300}}
                                 value={farPrice}
                                 onChange={handleFarPrice}

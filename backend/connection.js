@@ -13,7 +13,7 @@ const app =express();
 const monhoURL= 'mongodb://0.0.0.0/Darmaris';
 
 //database schemas
-const admin= require('./models/schema');
+const {admin,electronics,fashions,farniture}= require('./models/schema');
 
 //middlewares
 app.use(bodyParser.json());
@@ -35,6 +35,18 @@ mongoose.connect(monhoURL)
     console.log('Mongo error: ',err);
 });
 
+//multer file upload middleware
+const storage= multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,'/assets');
+    },
+    filename:(req,file,cb)=>{
+        cb(null,file.originalname);
+    }
+});
+
+const upload=multer({storage:storage});
+
 
 //application Routes
 //admin login route
@@ -55,10 +67,66 @@ app.get('/',function(req,res){
     res.json({mess:'server running'});
 });
 
-//posting to the database.
+//posting electronics to the database.
+app.post('/electronics',upload.single('image'), function(req,res){
+    const electronicAdd= new electronics({
+        image:req.file.filename,
+        description:req.body.description,
+        price:req.body.price
+    });
+    electronicAdd.save(function(err){
+        if(!err){
+            console.log({electronicAdd});
+        }else{
+            console.log('electronic add error: ',err);
+        }
+    });
+});
 
 
-//updating route
+//posting fashion to the database.
+app.post('/fashions',upload.single('image'), function(req,res){
+    const fashionAdd= new fashions({
+        image:req.file.filename,
+        description:req.body.description,
+        price:req.body.price
+    });
+    fashionAdd.save(function(err){
+        if(!err){
+            console.log({fashionAdd});
+        }else{
+            console.log('electronic add error: ',err);
+        }
+    });
+});
+
+
+//posting furniture to the database.
+app.post('/furniture',upload.single('image'), function(req,res){
+    const furnitureAdd= new farniture({
+        image:req.file.filename,
+        description:req.body.description,
+        price:req.body.price
+    });
+    furnitureAdd.save(function(err){
+        if(!err){
+            console.log({furnitureAdd});
+        }else{
+            console.log('electronic add error: ',err);
+        }
+    });
+});
+
+//get all the furnitures route
+app.get('/furnitures', function(req,res){
+    farniture.find({},function(errror,response){
+        if(response){
+            res.json({data:response});
+        }else{
+            console.log('furniture error: ',error);
+        }
+    })
+})
 
 
 //deleting route
