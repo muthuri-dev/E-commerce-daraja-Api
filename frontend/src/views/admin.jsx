@@ -27,7 +27,7 @@ const Admin = () => {
         .then(function(response){
             if(response.status===200){
                 alert('Successful');
-                navigate('/stock');
+                navigate('/dash');
             }else{
                 alert('Invalid email and password');
             }

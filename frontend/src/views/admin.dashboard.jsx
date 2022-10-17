@@ -1,111 +1,31 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import axios from "axios";
 
+const Dashboard = () => {
+    const[image, setImage]=useState(null);
+    const[description, setDescription]= useState(null);
+    const [price, setPrice]=useState(null);
 
-const Stock = () => {
-    const[electImage, setElectImage]= useState('');
-    const[electDesc, setElectDesc]= useState('');
-    const[electPrice, setElectPrice]= useState('');
-
-    const handleElectImage= function(e){
-        setElectImage(e.target.value);
+    const handleImage= function(e){
+        setImage({image:e.target.files[0]})
+     }
+    const handleDesc= function(e){
+        setDescription(e.target.value);
     }
-    const handleElectDesc= function(e){
-        setElectDesc(e.target.value);
+    const handlePrice= function(e){
+        setPrice(e.target.value);
     }
-    const handleElectPrice= function(e){
-        setElectPrice(e.target.value);
-    }
-    const handleElect = function(e){
+    const handleSubmit= function(e){
         e.preventDefault();
-        console.log({electImage,electDesc,electPrice});
-        const electronics=({
-            image:electImage,
-            description:electDesc,
-            price:electPrice,
-        });
-        axios.post('http://localhost:8080/electronics/',electronics)
-        .then(function(response){
-            if(response.status===200){
-                alert('saved');
-            }
-        })
-        .catch(function(err){
-            console.log('electronics error: ',err);
-        });
-    }
-    const[fashImage, setFashImage]= useState('');
-    const[fashDesc, setFashDesc]= useState('');
-    const[fashPrice, setFashPrice]= useState('');
-
-    const handleFashImage = function(e){
-        setFashImage(e.target.value);
-    }
-    const handleFashDesc = function(e){
-        setFashDesc(e.target.value);
-    }
-    const handleFashPrice = function(e){
-        setFashPrice(e.target.value);
-    }
-    const handleFash = function(e){
-        e.preventDefault();
-        console.log({fashImage,fashDesc,fashPrice});
-        const fashions=({
-            image:fashImage,
-            description:fashDesc,
-            price:fashPrice,
-        });
-        axios.post('http://localhost:8080/fashions/',fashions)
-        .then(function(response){
-            if(response.status===200){
-                alert('saved');
-            }
-        })
-        .catch(function(err){
-            console.log('fashions error: ',err);
-        });
-    }
-
-    const[farImage, setFarImage]= useState('');
-    const[farDesc, setFarDesc]= useState('');
-    const[farPrice, setFarPrice]= useState('');
-
-    const handleFarImage= function(e){
-        setFarImage(e.target.files[0]);
-    }
-    const handleFarDesc= function(e){
-        setFarDesc(e.target.value);
-    }
-    const handleFarPrice= function(e){
-        setFarPrice(e.target.value);
-    }
-    /*const handleFar= function(e){
-        e.preventDefault();
-        console.log({farImage,farDesc,farPrice});
-        const furnatures=({
-            image:farImage,
-            description:farDesc,
-            price:farPrice,
-        });
-        axios.post('http://localhost:8080/furniture/',furnatures)
-        .then(function(response){
-            if(response.status===200){
-                alert('saved');
-                console.log(response);
-            }
-        })
-        .catch(function(err){
-            console.log('furnature error: ',err);
-        });
-    }*/
-    const handleFar= function(e){
-        e.preventDefault();
-        console.log({farImage});
+        const formData = new FormData();
+        formData.append('image',image);
+        formData.append('description',description);
+        formData.append('price',price);
+        console.log([...formData]);
     }
     return ( 
         <div>
-            <Grid container direction='column'>
+             <Grid container direction='column'>
                 <Grid item>
                     <Typography color='primary'sx={{fontFamily:'monospace',marginTop:5}}>ADIMN DASHBOARD</Typography>
                 </Grid>
@@ -182,27 +102,27 @@ const Stock = () => {
                                 label=''
                                 type='file' required 
                                 sx={{marginTop:4,width:300}}
-                                value={farImage}
-                                onChange={handleFarImage}
+                                value={image}
+                                onChange={handleImage}
                             />
                             <TextField
                                 variant="outlined"
                                 label='Description'
                                 type='text' required
                                 sx={{marginTop:4,width:300}}
-                                value={farDesc}
-                                onChange={handleFarDesc}
+                                value={description}
+                                onChange={handleDesc}
                             />
                             <TextField
                                 variant="outlined"
                                 label='Price'
                                 type='text' required
                                 sx={{marginTop:4,width:300}}
-                                value={farPrice}
-                                onChange={handleFarPrice}
+                                value={price}
+                                onChange={handlePrice}
                             />
                             <Button variant='contained' color='primary'sx={{marginTop:4}}
-                                onClick={handleFar}
+                                onClick={handleSubmit}
                             >ADD</Button>
                         </form>
                     </Grid>
@@ -212,4 +132,4 @@ const Stock = () => {
      );
 }
  
-export default Stock;
+export default Dashboard;
