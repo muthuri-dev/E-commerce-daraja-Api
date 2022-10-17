@@ -4,6 +4,7 @@ const cors= require('cors');
 const mongoose= require('mongoose');
 const multer= require('multer');
 const PORT= 8080;
+const fs= require('fs');
 
 
 //initializing app
@@ -18,6 +19,9 @@ const {admin,electronics,fashions,farniture}= require('./models/schema');
 //middlewares
 app.use(bodyParser.json());
 app.use(cors());
+
+//static folders
+app.use('/uploads',express.static('./uploads'));
 
 
 //connecting to database and server
@@ -36,14 +40,16 @@ mongoose.connect(monhoURL)
 });
 
 //multer file upload middleware
-const Storage= multer.diskStorage({
-    destination:'./assets',
+const storage= multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null, 'uploads')
+    },
     filename:(req,file,cb)=>{
         cb(null,file.originalname);
     }
 });
 
-const upload=multer({storage:Storage}).single('image');
+const upload=multer({storage:storage}).single('image');
 
 
 //application Routes
@@ -100,25 +106,22 @@ app.post('/fashions',upload, function(req,res){
 
 
 //posting furniture to the database.
-app.post('/furniture', function(req,res){
-    upload(req,res,function(err){
-        if(err){
-            console.log('multer upload error: ',err);
+app.post('/furniture',upload, function(req,res){
+    const furnitureAdd= new farniture({
+        image:{
+            data:fs.readFileSync('uploads/'+req.file.filename),
+            contentType:'image/png'
+        },
+        description:req.body.description,
+        price:req.body.price
+    });
+    furnitureAdd.save(function(err){
+        if(!err){
+            console.log({furnitureAdd});
         }else{
-            const furnitureAdd= new farniture({
-                image:req.file.filename,
-                description:req.body.description,
-                price:req.body.price
-            });
-            furnitureAdd.save(function(err){
-                if(!err){
-                    console.log({furnitureAdd});
-                }else{
-                    console.log('electronic add error: ',err);
-                }
-            });
+            console.log('electronic add error: ',err);
         }
-    })
+    });
 });
 
 //get all the furnitures route
