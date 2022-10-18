@@ -4,7 +4,7 @@ import { Card, CardActions, CardContent, Grid, IconButton, Typography } from "@m
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 
 
-const Furnature = () => {
+const Fashions = () => {
     const[furnitures, setFurnitures]= useState([]);
     useEffect(function(){
         axios.get('http://localhost:8080/furnitures/')
@@ -29,7 +29,7 @@ const Furnature = () => {
                         <Card elevation={5} spaceing={2} sx={{width:250,height:300}}>
                             <CardContent>
                                 <Typography>{furniture.description}</Typography>
-                                <Typography>{furniture.image}</Typography>
+                                <img src={furniture.image} alt='null' />
                                 <Typography>{furniture.price}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
@@ -46,4 +46,4 @@ const Furnature = () => {
     );
 }
  
-export default Furnature;
+export default Fashions;

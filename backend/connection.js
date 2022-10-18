@@ -11,7 +11,7 @@ const fs= require('fs');
 const app =express();
 
 //database
-const monhoURL= 'mongodb://0.0.0.0/Darmaris';
+const mongoURL= 'mongodb://0.0.0.0/Darmaris';
 
 //database schemas
 const {admin,electronics,fashions,farniture}= require('./models/schema');
@@ -25,7 +25,7 @@ app.use('/uploads',express.static('./uploads'));
 
 
 //connecting to database and server
-mongoose.connect(monhoURL)
+mongoose.connect(mongoURL)
 .then(function(){
     app.listen(PORT, function(err){
         if(!err){
@@ -74,7 +74,10 @@ app.get('/',function(req,res){
 //posting electronics to the database.
 app.post('/electronics',upload, function(req,res){
     const electronicAdd= new electronics({
-        image:req.file.filename,
+        image:{
+            data:fs.readFileSync('uploads/'+req.file.filename),
+            contentType:'image/png'
+        },
         description:req.body.description,
         price:req.body.price
     });
@@ -91,7 +94,10 @@ app.post('/electronics',upload, function(req,res){
 //posting fashion to the database.
 app.post('/fashions',upload, function(req,res){
     const fashionAdd= new fashions({
-        image:req.file.filename,
+        image:{
+            data:fs.readFileSync('uploads/'+req.file.filename),
+            contentType:'image/png'
+        },
         description:req.body.description,
         price:req.body.price
     });
@@ -132,8 +138,30 @@ app.get('/furnitures', function(req,res){
         }else{
             console.log('furniture error: ',error);
         }
-    })
-})
+    });
+});
+
+//get all the electronicss route
+app.get('/electronics', function(req,res){
+    electronics.find({},function(errror,response){
+        if(response){
+            res.json({data:response});
+        }else{
+            console.log('furniture error: ',error);
+        }
+    });
+});
+
+//get all the electronicss route
+app.get('/fashions', function(req,res){
+    fashions.find({},function(errror,response){
+        if(response){
+            res.json({data:response});
+        }else{
+            console.log('furniture error: ',error);
+        }
+    });
+});
 
 
 //deleting route

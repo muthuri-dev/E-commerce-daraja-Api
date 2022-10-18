@@ -1,4 +1,6 @@
 import{BrowserRouter as Switch, Routes, Route} from 'react-router-dom';
+import Electronics from './utils/electronics';
+import Fashions from './utils/furnature';
 import Furnature from './utils/furnature';
 import Admin from './views/admin';
 import Dashboard from './views/admin.dashboard';
@@ -12,9 +14,10 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home/>}/>
           <Route exact path='/admin' element={<Admin/>}/>
-         {/*} <Route exact path ='/stock' element={<Stock/>}/>*/}
+          <Route exact path ='/fashions' element={<Fashions/>}/>
           <Route exact path='/furnitures' element={<Furnature/>}/>
-          <Route esxact path= '/dash' element={<Dashboard/>}/>
+          <Route exact path= '/dash' element={<Dashboard/>}/>
+          <Route exact path='/electronics' element={<Electronics/>}/>
         </Routes>
       </Switch>
     </div>

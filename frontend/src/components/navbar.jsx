@@ -67,13 +67,13 @@ const Navbar = () => {
                    <ListItemButton  divider onClick={()=>setDrawer(false)}>
                         <ListItemText>CLOSE  X</ListItemText>
                    </ListItemButton >
-                    <ListItemButton divider>
+                    <ListItemButton divider onClick={()=>{navigate('/electronics')}}>
                         <ListItemIcon>
                             <ComputerOutlinedIcon/>
                         </ListItemIcon>
                         <ListItemText>Computers</ListItemText>
                     </ListItemButton>
-                    <ListItemButton divider>
+                    <ListItemButton divider onClick={()=>{navigate('/fashions')}}>
                         <ListItemIcon>
                             <WomanOutlinedIcon/>
                         </ListItemIcon>
@@ -85,7 +85,7 @@ const Navbar = () => {
                         </ListItemIcon>
                         <ListItemText>Furniture</ListItemText>
                     </ListItemButton>
-                    <ListItemButton divider>
+                    <ListItemButton divider onClick={()=>{navigate('/electronics')}}>
                         <ListItemIcon>
                             <ComputerOutlinedIcon/>
                         </ListItemIcon>

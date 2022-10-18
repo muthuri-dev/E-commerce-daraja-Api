@@ -1,13 +1,20 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import Axios from "axios";
 
 const Dashboard = () => {
+
+    const formData= new FormData();
+
+    //furnitures
     const[image, setImage]=useState(null);
-    const[description, setDescription]= useState(null);
-    const [price, setPrice]=useState(null);
+    const[description, setDescription]= useState('');
+    const [price, setPrice]=useState('');
 
     const handleImage= function(e){
-        setImage({image:e.target.files[0]})
+        if(e.target.files && e.target.files.length>0){
+            setImage(e.target.files[0]);
+        }else return null;
      }
     const handleDesc= function(e){
         setDescription(e.target.value);
@@ -17,12 +24,78 @@ const Dashboard = () => {
     }
     const handleSubmit= function(e){
         e.preventDefault();
-        const formData = new FormData();
         formData.append('image',image);
         formData.append('description',description);
         formData.append('price',price);
         console.log([...formData]);
+
+        Axios.post('http://localhost:8080/furniture',formData)
+        
+             setImage(null);
+            setDescription('');
+            setPrice('');
     }
+    //electronics
+
+    const[electronic, setElectronic]=useState(null);
+    const[electrDescription, setElectrDescription]= useState('');
+    const [electrprice, setElectrPrice]=useState('');
+
+    const handleElectrImage= function(event){
+        if(event.target.files && event.target.files.length>0){
+            setElectronic(event.target.files[0]);
+        }else return null;
+     }
+    const handleElectrDesc= function(event){
+        setElectrDescription(event.target.value);
+    }
+    const handleElectrPrice= function(event){
+        setElectrPrice(event.target.value);
+    }
+    const handleElectrSubmit= function(e){
+        e.preventDefault();
+        formData.append('image',electronic);
+        formData.append('description',electrDescription);
+        formData.append('price',electrprice);
+        console.log([...formData]);
+        Axios.post('http://localhost:8080/electronics/',formData);
+
+        setElectronic(null);
+        setElectrDescription('');
+        setElectrPrice('');
+    }
+
+    //Fashion
+    const[fashion, setFashion]=useState(null);
+    const[fashDescription, setFashDescription]= useState('');
+    const [fashPrice, setFashPrice]=useState('');
+
+    const handleFashImage= function(event){
+        if(event.target.files && event.target.files.length>0){
+            setFashion(event.target.files[0]);
+        }else return null;
+     }
+    const handleFashDesc= function(event){
+        setFashDescription(event.target.value);
+    }
+    const handleFashPrice= function(event){
+        setFashPrice(event.target.value);
+    }
+    const handleFashSubmit= function(event){
+        event.preventDefault();
+        formData.append('image',fashion);
+        formData.append('description',fashDescription);
+        formData.append('price',fashPrice);
+        console.log([...formData]);
+
+        Axios.post('http://localhost:8080/fashions/',formData);
+
+        setFashion(null);
+        setFashDescription('');
+        setFashPrice('');
+    }
+
+
     return ( 
         <div>
              <Grid container direction='column'>
@@ -30,7 +103,7 @@ const Dashboard = () => {
                     <Typography color='primary'sx={{fontFamily:'monospace',marginTop:5}}>ADIMN DASHBOARD</Typography>
                 </Grid>
                 <Grid item container direcrion='row'sx={{marginTop:4,justifyContent:'center'}} >
-                    {/*<Grid item>
+                    <Grid item>
                         <Typography color='primary'sx={{marginTop:4}}>COMPUTERS & ELECTRONICS</Typography>
                         <form>
                             <TextField
@@ -38,27 +111,26 @@ const Dashboard = () => {
                                 label=''
                                 type='file'required
                                 sx={{marginTop:4,width:300}}
-                                value={electImage}
-                                onChange={handleElectImage}
+                                onChange={handleElectrImage}
                             />
                             <TextField
                                 variant="outlined"
                                 label='Description'
                                 type='text'required
                                 sx={{marginTop:4,width:300}}
-                                value={electDesc}
-                                onChange={handleElectDesc}
+                                value={electrDescription}
+                                onChange={handleElectrDesc}
                             />
                             <TextField
                                 variant="outlined"
                                 label='Price'
                                 type='text'required
                                 sx={{marginTop:4,width:300}}
-                                value={electPrice}
-                                onChange={handleElectPrice}
+                                value={electrprice}
+                                onChange={handleElectrPrice}
                             />
                             <Button variant='contained' color='primary'sx={{marginTop:4}}
-                                onClick={handleElect}
+                                onClick={handleElectrSubmit}
                             >ADD</Button>
                         </form>
                     </Grid>
@@ -70,7 +142,6 @@ const Dashboard = () => {
                                 label=''
                                 type='file'required
                                 sx={{marginTop:4,width:300}}
-                                value={fashImage}
                                 onChange={handleFashImage}
                             />
                             <TextField
@@ -78,7 +149,7 @@ const Dashboard = () => {
                                 label='Description'
                                 type='text' required
                                 sx={{marginTop:4,width:300}}
-                                value={fashDesc}
+                                value={fashDescription}
                                 onChange={handleFashDesc}
                             />
                             <TextField
@@ -90,10 +161,10 @@ const Dashboard = () => {
                                 onChange={handleFashPrice}
                             />
                             <Button variant='outlined' color='primary'sx={{marginTop:4}}
-                                onClick={handleFash}
+                                onClick={handleFashSubmit}
                             >ADD</Button>
                         </form>
-    </Grid>*/}
+                    </Grid>
                     <Grid item>
                         <Typography color='primary'sx={{marginTop:4}}>FURNITURE</Typography>
                         <form >
@@ -102,7 +173,6 @@ const Dashboard = () => {
                                 label=''
                                 type='file' required 
                                 sx={{marginTop:4,width:300}}
-                                value={image}
                                 onChange={handleImage}
                             />
                             <TextField

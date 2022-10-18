@@ -16,8 +16,8 @@ const admin= mongoose.model('admin', adminSchema);
 
 const electSchema= new schema({
     image:{
-        type:String,
-        required:true
+        data:Buffer,
+        contentType:String,
     },
     description:{
         type:String,
@@ -33,8 +33,8 @@ const electronics= mongoose.model('electronics',electSchema);
 
 const fashionSchema= new schema({
     image:{
-        type:String,
-        required:true
+        data:Buffer,
+        contentType:String,
     },
     description:{
         type:String,

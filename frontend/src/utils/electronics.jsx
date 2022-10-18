@@ -1,9 +1,49 @@
 
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Card, CardActions, CardContent, Grid, IconButton, Typography } from "@mui/material";
+import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 
 
 const Electronics = () => {
+    const[electronics, setElectronics]= useState([]);
+    useEffect(function(){
+        axios.get('http://localhost:8080/electronics/')
+        .then(function(response){
+            if(response.status===200){
+                setElectronics(response.data.data);
+            }
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    },[]);
+
     return (  
-        <div></div>
+        <div>
+            <Grid container direction='column'>
+                <Grid item>
+                    <Typography color="primary" variant='h6'>ELECTRONICS AND COMPUTERS STORE</Typography>
+                </Grid>
+                <Grid item container sx={{justifyContent:'center',marginTop:5}}>
+                    {electronics && electronics.map((electronic)=>(
+                        <Card elevation={5} spaceing={2} sx={{width:250,height:300,margin:2}}>
+                            <CardContent>
+                                <Typography>{electronic.description}</Typography>
+                                <img src={electronic.image} alt={electronic.price} />
+                                <Typography>{electronic.price}</Typography>
+                            </CardContent>
+                            <CardActions disableSpacing>
+                            <IconButton>
+                                   <AddShoppingCartOutlinedIcon/>
+                               </IconButton>
+                            </CardActions>
+                        </Card>
+                    ))}
+                    {!electronics && <Typography sx={{fontFamily:'monospace'}}>Loading Data ...</Typography>}
+                </Grid>
+            </Grid>
+        </div>
     );
 }
  
