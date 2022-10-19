@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, CardActions, CardContent, Grid, IconButton, Typography } from "@mui/material";
+import { Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 
 
@@ -26,20 +26,29 @@ const Electronics = () => {
                     <Typography color="primary" variant='h6'>ELECTRONICS AND COMPUTERS STORE</Typography>
                 </Grid>
                 <Grid item container sx={{justifyContent:'center',marginTop:5}}>
-                    {electronics && electronics.map((electronic)=>(
-                        <Card elevation={5} spaceing={2} sx={{width:250,height:300,margin:2}}>
+                    {electronics && electronics.map(function(electronic){
+                       
+
+                        return(
+                            <Card elevation={5} spaceing={2} sx={{width:250,height:300,margin:2}}>
+                             <CardMedia
+                             component="img"
+                             height="150"
+                             image='../assets/payment.svg'
+                             alt="image null"
+                             />   
                             <CardContent>
                                 <Typography>{electronic.description}</Typography>
-                                <img src={electronic.image} alt={electronic.price} />
                                 <Typography>{electronic.price}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
-                            <IconButton>
+                               <IconButton>
                                    <AddShoppingCartOutlinedIcon/>
                                </IconButton>
                             </CardActions>
                         </Card>
-                    ))}
+                        )
+                    })}
                     {!electronics && <Typography sx={{fontFamily:'monospace'}}>Loading Data ...</Typography>}
                 </Grid>
             </Grid>

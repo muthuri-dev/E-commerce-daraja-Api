@@ -17,7 +17,6 @@ const Fashions = () => {
             console.log(err);
         });
     },[]);
-
     return (  
         <div>
             <Grid container direction='column'>
@@ -26,10 +25,11 @@ const Fashions = () => {
                 </Grid>
                 <Grid item container sx={{justifyContent:'center',marginTop:5}}>
                     {furnitures && furnitures.map((furniture)=>(
+                        
                         <Card elevation={5} spaceing={2} sx={{width:250,height:300}}>
                             <CardContent>
                                 <Typography>{furniture.description}</Typography>
-                                <img src={furniture.image} alt='null' />
+                                <img src={furniture.image}alt='null' />
                                 <Typography>{furniture.price}</Typography>
                             </CardContent>
                             <CardActions disableSpacing>
