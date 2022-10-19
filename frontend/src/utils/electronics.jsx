@@ -27,15 +27,18 @@ const Electronics = () => {
                 </Grid>
                 <Grid item container sx={{justifyContent:'center',marginTop:5}}>
                     {electronics && electronics.map(function(electronic){
-                       
+                       const blob = new Blob([Int8Array.from(electronic.image.data.data)], {type: electronic.image.contentType });
+
+                       const image = window.URL.createObjectURL(blob);
 
                         return(
                             <Card elevation={5} spaceing={2} sx={{width:250,height:300,margin:2}}>
                              <CardMedia
                              component="img"
                              height="150"
-                             image='../assets/payment.svg'
+                             image={image}
                              alt="image null"
+                             sx={{margin:1,objectFit:'contain'}}
                              />   
                             <CardContent>
                                 <Typography>{electronic.description}</Typography>

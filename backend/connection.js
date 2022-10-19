@@ -105,7 +105,7 @@ app.post('/fashions',upload, function(req,res){
         if(!err){
             console.log({fashionAdd});
         }else{
-            console.log('electronic add error: ',err);
+            console.log('fashion add error: ',err);
         }
     });
 });

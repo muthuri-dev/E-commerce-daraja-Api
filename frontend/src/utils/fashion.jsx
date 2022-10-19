@@ -1,11 +1,11 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Card, CardActions, CardContent, Grid, IconButton, Typography } from "@mui/material";
+import { Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from "@mui/material";
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 
 
-const Furnature = () => {
+const Fashions = () => {
     const[fashions, setFashions]= useState([]);
     useEffect(function(){
         axios.get('http://localhost:8080/fashions/')
@@ -26,11 +26,21 @@ const Furnature = () => {
                     <Typography color="primary" variant='h6'>FASHION STORE</Typography>
                 </Grid>
                 <Grid item container sx={{justifyContent:'center',marginTop:5}}>
-                    {fashions && fashions.map((fashion)=>(
-                        <Card elevation={5} spaceing={2} sx={{width:250,height:300}}>
+                    {fashions && fashions.map((fashion)=>{
+                        const blob = new Blob([Int8Array.from(fashion.image.data.data)], {type: fashion.image.contentType });
+
+                        const image = window.URL.createObjectURL(blob);
+                        return(
+                            <Card elevation={5} spaceing={2} sx={{width:250,height:300}}>
+                             <CardMedia
+                             component="img"
+                             height="150"
+                             image={image}
+                             alt="image null"
+                             sx={{margin:1,objectFit:'contain'}}
+                             />     
                             <CardContent>
                                 <Typography>{fashion.description}</Typography>
-                                <img src={fashion.image} alt={fashion.price} />
                                 <Typography>{fashion.price}</Typography>
                             </CardContent>
                             <CardActions >
@@ -39,7 +49,9 @@ const Furnature = () => {
                                </IconButton>
                             </CardActions>
                         </Card>
-                    ))}
+                        )
+                    }
+                    )}
                     {!fashions && <Typography sx={{fontFamily:'monospace'}}>Loading Data ...</Typography>}
                 </Grid>
             </Grid>
@@ -47,4 +59,4 @@ const Furnature = () => {
     );
 }
  
-export default Furnature;
+export default Fashions;

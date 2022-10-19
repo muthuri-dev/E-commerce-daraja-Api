@@ -90,7 +90,7 @@ const Dashboard = () => {
 
         Axios.post('http://localhost:8080/fashions/',formData);
 
-        setFashion(null);
+        setFashion('');
         setFashDescription('');
         setFashPrice('');
     }
