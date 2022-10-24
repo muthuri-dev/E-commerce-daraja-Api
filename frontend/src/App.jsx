@@ -1,4 +1,5 @@
 import{BrowserRouter as Switch, Routes, Route} from 'react-router-dom';
+import Navbar from './components/navbar';
 import Electronics from './utils/electronics';
 import Fashions from './utils/fashion';
 import Furnature from './utils/furnature';
@@ -10,6 +11,7 @@ function App() {
   return (
     <div className="App">
       <Switch>
+        <Navbar/>
         <Routes>
           <Route exact path='/' element={<Home/>}/>
           <Route exact path='/admin' element={<Admin/>}/>

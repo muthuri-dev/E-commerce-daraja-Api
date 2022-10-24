@@ -4,6 +4,7 @@ import { Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 
 
+
 const Furnitures = () => {
     const[furnitures, setFurnitures]= useState([]);
     useEffect(function(){
@@ -21,7 +22,8 @@ const Furnitures = () => {
         <div>
             <Grid container direction='column'>
                 <Grid item>
-                    <Typography color="primary" variant='h6'>FURNITURES STORE</Typography>
+                    <Typography color="primary" variant='h6'
+                    sx={{marginTop:10}}>FURNITURES STORE</Typography>
                 </Grid>
                 <Grid item container sx={{justifyContent:'center',marginTop:5}}>
                     {furnitures && furnitures.map((furniture)=>{

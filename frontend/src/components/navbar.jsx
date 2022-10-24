@@ -47,9 +47,9 @@ const Navbar = () => {
                         </Grid>
                         <Grid item xs={3}>
                             <Box display='flex'>
-                                <IconButton sx={{marginLeft:'auto', color:'white'}}>
-                                    <ShoppingCartOutlinedIcon/>
-                                </IconButton>
+                                <Button startIcon={<ShoppingCartOutlinedIcon/>} sx={{color:'white',fontSize:20,margin:'auto'}}>
+                                    <Typography sx={{fontFamily:'monospace',fontSize:12,backgroundColor:'red',borderRadius:'50%'}}>22</Typography>
+                                </Button>
                             <Button variant='contained' color='success' sx={{display:'flex',marginLeft:3}}
                             onClick={handleModal}
                             >LOGIN</Button>
@@ -65,31 +65,31 @@ const Navbar = () => {
             >
                 <List>
                    <ListItemButton  divider onClick={()=>setDrawer(false)}>
-                        <ListItemText>CLOSE  X</ListItemText>
+                        <ListItemText><Typography sx={{fontSize:70,display:'flex',justifyContent:'end',fontStyle:'italic'}}>&times;</Typography></ListItemText>
                    </ListItemButton >
                     <ListItemButton divider onClick={()=>{navigate('/electronics')}}>
                         <ListItemIcon>
                             <ComputerOutlinedIcon/>
                         </ListItemIcon>
-                        <ListItemText>Computers</ListItemText>
+                        <ListItemText ><Typography sx={{fontFamily:'monospace'}}>Computers</Typography></ListItemText>
                     </ListItemButton>
                     <ListItemButton divider onClick={()=>{navigate('/fashions')}}>
                         <ListItemIcon>
                             <WomanOutlinedIcon/>
                         </ListItemIcon>
-                        <ListItemText>Fashion</ListItemText>
+                        <ListItemText><Typography sx={{fontFamily:'monospace'}}>Fashions</Typography></ListItemText>
                     </ListItemButton>
                     <ListItemButton divider onClick={()=>navigate('/furnitures')}>
                         <ListItemIcon>
                             <ChairOutlinedIcon/>
                         </ListItemIcon>
-                        <ListItemText>Furniture</ListItemText>
+                        <ListItemText><Typography sx={{fontFamily:'monospace'}}>Furnatures</Typography></ListItemText>
                     </ListItemButton>
                     <ListItemButton divider onClick={()=>{navigate('/electronics')}}>
                         <ListItemIcon>
                             <ComputerOutlinedIcon/>
                         </ListItemIcon>
-                        <ListItemText>Electronics</ListItemText>
+                        <ListItemText><Typography sx={{fontFamily:'monospace'}}>Electronics</Typography></ListItemText>
                     </ListItemButton>
                     <Button variant='contained'color='primary'
                     sx={{margin:6}} onClick={handleAdmin}

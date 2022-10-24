@@ -5,8 +5,14 @@ import { Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 
 
+
 const Fashions = () => {
     const[fashions, setFashions]= useState([]);
+    const[cart, setCart]=useState(null);
+
+    const addToCart= function(e){
+        setCart();
+    }
     useEffect(function(){
         axios.get('http://localhost:8080/fashions/')
         .then(function(response){
@@ -23,7 +29,9 @@ const Fashions = () => {
         <div>
             <Grid container direction='column'>
                 <Grid item>
-                    <Typography color="primary" variant='h6'>FASHION STORE</Typography>
+                    <Typography color="primary" variant='h6'
+                    sx={{marginTop:10}}
+                    >FASHION STORE</Typography>
                 </Grid>
                 <Grid item container sx={{justifyContent:'center',marginTop:5}}>
                     {fashions && fashions.map((fashion)=>{
@@ -31,7 +39,7 @@ const Fashions = () => {
 
                         const image = window.URL.createObjectURL(blob);
                         return(
-                            <Card elevation={5} spaceing={2} sx={{width:250,height:300}}>
+                            <Card elevation={5} spaceing={2} sx={{width:250,height:300,margin:3}}>
                              <CardMedia
                              component="img"
                              height="150"
@@ -44,7 +52,7 @@ const Fashions = () => {
                                 <Typography>{fashion.price}</Typography>
                             </CardContent>
                             <CardActions >
-                            <IconButton>
+                            <IconButton onClick={addToCart}>
                                    <AddShoppingCartOutlinedIcon/>
                                </IconButton>
                             </CardActions>
