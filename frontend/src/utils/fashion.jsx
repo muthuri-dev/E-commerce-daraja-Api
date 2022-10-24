@@ -8,11 +8,13 @@ import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutl
 
 const Fashions = () => {
     const[fashions, setFashions]= useState([]);
-    const[cart, setCart]=useState(null);
 
-    const addToCart= function(e){
-        setCart();
+    const addCart= function(e){
+        const classes=({
+            name:'kennedy',
+        })
     }
+    
     useEffect(function(){
         axios.get('http://localhost:8080/fashions/')
         .then(function(response){
@@ -24,6 +26,7 @@ const Fashions = () => {
             console.log(err);
         });
     },[]);
+    
 
     return (  
         <div>
@@ -39,7 +42,7 @@ const Fashions = () => {
 
                         const image = window.URL.createObjectURL(blob);
                         return(
-                            <Card elevation={5} spaceing={2} sx={{width:250,height:300,margin:3}}>
+                            <Card elevation={5} spaceing={2} sx={{width:250,height:300,margin:3}} addCart={addCart}>
                              <CardMedia
                              component="img"
                              height="150"
@@ -52,7 +55,7 @@ const Fashions = () => {
                                 <Typography>{fashion.price}</Typography>
                             </CardContent>
                             <CardActions >
-                            <IconButton onClick={addToCart}>
+                            <IconButton onClick={addCart}>
                                    <AddShoppingCartOutlinedIcon/>
                                </IconButton>
                             </CardActions>

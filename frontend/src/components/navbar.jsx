@@ -12,11 +12,12 @@ import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
 import WomanOutlinedIcon from '@mui/icons-material/WomanOutlined';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({addCart}) => {
     const navigate= useNavigate();
     const[drawer, setDrawer]= useState(false);
     const[value, setValue]= useState();
     const [open, setOpen]= useState(false);
+    const[cart, setCart]=useState(null);
     const handleDrawer= function(){
         setDrawer(true);
     }
