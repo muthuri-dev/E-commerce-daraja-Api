@@ -41,9 +41,9 @@ const Navbar = ({addCart}) => {
                         <Grid item xs={1}></Grid>
                         <Grid item xs={6}>
                             <Tabs value={value}textColor='inherit' indicatorColor='secondary'onChange={(e,val)=>setValue(val)}>
-                                <Tab label='HOME'/>
-                                <Tab label='CONTACTS'/>
-                                <Tab label='ABOUT US'/>
+                                <Tab label='HOME'onClick={()=>navigate('/')}/>
+                                <Tab label='CONTACTS' onClick={()=>navigate('/contacts')}/>
+                                <Tab label='ABOUT US' onClick={()=>navigate('/about')}/>
                             </Tabs>
                         </Grid>
                         <Grid item xs={3}>

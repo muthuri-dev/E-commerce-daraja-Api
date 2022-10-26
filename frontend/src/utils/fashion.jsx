@@ -10,9 +10,7 @@ const Fashions = () => {
     const[fashions, setFashions]= useState([]);
 
     const addCart= function(e){
-        const classes=({
-            name:'kennedy',
-        })
+        console.log('clicked');
     }
     
     useEffect(function(){

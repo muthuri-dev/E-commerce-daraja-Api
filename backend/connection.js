@@ -5,6 +5,7 @@ const mongoose= require('mongoose');
 const multer= require('multer');
 const PORT= 8080;
 const fs= require('fs');
+const request= require('request');
 
 
 //initializing app
@@ -164,4 +165,3 @@ app.get('/fashions', function(req,res){
 });
 
 
-//deleting route
