@@ -41,7 +41,7 @@ const getFashionsController = async(req, res, next) => {
 
 //get furniture controller;
 const getFurnitureController = async(req, res, next) => {
-    await fashions.find({})
+    await farniture.find({})
         .then((response) => {
             if (response) {
                 res.json({ data: response });

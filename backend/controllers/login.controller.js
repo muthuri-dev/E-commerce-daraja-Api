@@ -1,7 +1,3 @@
-// importing mongoose
-const mongoose = require('mongoose');
-
-
 //importing database schema;
 const {
     admin
