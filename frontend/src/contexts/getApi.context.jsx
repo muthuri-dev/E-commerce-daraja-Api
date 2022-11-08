@@ -18,7 +18,7 @@ const GetContextProvider = (props) => {
 
     //fetching electronics;
     useEffect(()=>{
-        const url='http://localhost:8080/shop/electronics';
+        const url='https://damaris-ecommerce.herokuapp.com/shop/electronics';
         axios.get(url)
             .then(response=>setElectronics(response.data.data))
             .catch(error=>console.log(error.message));
@@ -26,7 +26,7 @@ const GetContextProvider = (props) => {
 
     //fetching fashions;
     useEffect(()=>{
-        const url='http://localhost:8080/shop/fashions';
+        const url='https://damaris-ecommerce.herokuapp.com/shop/fashions';
         axios.get(url)
             .then(response=>setFashions(response.data.data))
             .catch(error=>console.log(error.message));
@@ -34,7 +34,7 @@ const GetContextProvider = (props) => {
 
     //fetching furnitures;
     useEffect(()=>{
-        const url='http://localhost:8080/shop/furniture';
+        const url='https://damaris-ecommerce.herokuapp.com/shop/furniture';
         axios.get(url)
             .then(response=>setFurnitures(response.data.data))
             .catch(error=>console.log(error.message));

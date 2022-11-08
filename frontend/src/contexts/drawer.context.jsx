@@ -13,10 +13,13 @@ const DrawerContextProvider = (props) => {
     const openDrawer=()=>{
         setDrawer(true);
     }
+    const closeDrawer=()=>{
+        setDrawer(false);
+    }
 
     return ( 
         <>
-        <DrawerContext.Provider value={{openDrawer,drawer}}>
+        <DrawerContext.Provider value={{openDrawer,drawer,closeDrawer}}>
             {props.children}
         </DrawerContext.Provider>
         </>

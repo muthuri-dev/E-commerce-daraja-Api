@@ -11,12 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.App{
-  text-align: center;
-}
 form{
   display: flex;
   flex-direction: column;
   width: 400px;
+  align-items: center;
+}
+.App{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+form{
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
