@@ -17,7 +17,14 @@ const {
 //importing post controllers;
 const {
     postElectronicsController,
+    postStkController,
 } = require('../controllers/post.controller');
+
+//importing  token middleware;
+const {
+    tokenMiddleware,
+} = require('../middleware/token.middleware');
+
 
 
 //importing multer file upload middleware;
@@ -31,11 +38,11 @@ router.post('/login', loginController);
 //get routes
 router.get('/electronics', getElectronicsController);
 
-
 //post Routes
-
 router.post('/electronics', upload, postElectronicsController);
 
+//stk form payment;
+router.post('/stk', tokenMiddleware, postStkController);
 
 
 //exporting routes;
