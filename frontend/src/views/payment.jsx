@@ -18,10 +18,11 @@ const Payment = () => {
             amount:amount,
             phone:phone
         })
-        axios.post('http://localhost:8080/token',mpesaPost)
+        axios.post('https://damaris-ecommerce.herokuapp.com/shop/stk',mpesaPost)
         .then((response)=>{
             if(response.status===200){
                 console.log(response);
+                alert('payment successful');
             }
         })
         .catch((err)=>{
