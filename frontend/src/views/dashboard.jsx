@@ -8,35 +8,7 @@ const Dashboard = () => {
 
     const formData= new FormData();
 
-    //furnitures
-    const[image, setImage]=useState(null);
-    const[description, setDescription]= useState('');
-    const [price, setPrice]=useState('');
-
-    const handleImage= function(e){
-        if(e.target.files && e.target.files.length>0){
-            setImage(e.target.files[0]);
-        }else return null;
-     }
-    const handleDesc= function(e){
-        setDescription(e.target.value);
-    }
-    const handlePrice= function(e){
-        setPrice(e.target.value);
-    }
-    const handleSubmit= function(e){
-        e.preventDefault();
-        formData.append('image',image);
-        formData.append('description',description);
-        formData.append('price',price);
-        console.log([...formData]);
-
-        Axios.post('https://damaris-ecommerce.herokuapp.com/shop/furniture',formData)
-        
-             setImage(null);
-            setDescription('');
-            setPrice('');
-    }
+    
     //electronics
 
     const[electronic, setElectronic]=useState(null);
@@ -66,37 +38,6 @@ const Dashboard = () => {
         setElectrDescription('');
         setElectrPrice('');
     }
-
-    //Fashion
-    const[fashion, setFashion]=useState(null);
-    const[fashDescription, setFashDescription]= useState('');
-    const [fashPrice, setFashPrice]=useState('');
-
-    const handleFashImage= function(event){
-        if(event.target.files && event.target.files.length>0){
-            setFashion(event.target.files[0]);
-        }else return null;
-     }
-    const handleFashDesc= function(event){
-        setFashDescription(event.target.value);
-    }
-    const handleFashPrice= function(event){
-        setFashPrice(event.target.value);
-    }
-    const handleFashSubmit= function(event){
-        event.preventDefault();
-        formData.append('image',fashion);
-        formData.append('description',fashDescription);
-        formData.append('price',fashPrice);
-        console.log([...formData]);
-
-        Axios.post('https://damaris-ecommerce.herokuapp.com/shop/fashions/',formData);
-
-        setFashion('');
-        setFashDescription('');
-        setFashPrice('');
-    }
-
 
     return ( 
         <div>
@@ -133,68 +74,6 @@ const Dashboard = () => {
                             />
                             <Button variant='contained' color='primary'sx={{marginTop:4}}
                                 onClick={handleElectrSubmit}
-                            >ADD</Button>
-                        </form>
-                    </Grid>
-                    <Grid item>
-                        <Typography color='primary'sx={{marginTop:4}}>FASHION</Typography>
-                        <form>
-                            <TextField
-                                variant="outlined"
-                                label=''
-                                type='file'required
-                                sx={{marginTop:4,width:300}}
-                                onChange={handleFashImage}
-                            />
-                            <TextField
-                                variant="outlined"
-                                label='Description'
-                                type='text' required
-                                sx={{marginTop:4,width:300}}
-                                value={fashDescription}
-                                onChange={handleFashDesc}
-                            />
-                            <TextField
-                                variant="outlined"
-                                label='Price'
-                                type='text' required
-                                sx={{marginTop:4,width:300}}
-                                value={fashPrice}
-                                onChange={handleFashPrice}
-                            />
-                            <Button variant='outlined' color='primary'sx={{marginTop:4}}
-                                onClick={handleFashSubmit}
-                            >ADD</Button>
-                        </form>
-                    </Grid>
-                    <Grid item>
-                        <Typography color='primary'sx={{marginTop:4}}>FURNITURE</Typography>
-                        <form >
-                            <TextField
-                                variant="outlined"
-                                label=''
-                                type='file' required 
-                                sx={{marginTop:4,width:300}}
-                                onChange={handleImage}
-                            />
-                            <TextField
-                                variant="outlined"
-                                label='Description'
-                                type='text' required
-                                sx={{marginTop:4,width:300}}
-                                value={description}
-                                onChange={handleDesc}
-                            />
-                            <TextField
-                                variant="outlined"
-                                label='Price'
-                                type='text' required
-                                sx={{marginTop:4,width:300}}
-                                value={price}
-                                onChange={handlePrice}
-                            />
-                            <Button variant='contained' color='primary'sx={{marginTop:4}}
-                                onClick={handleSubmit}
                             >ADD</Button>
                         </form>
                     </Grid>

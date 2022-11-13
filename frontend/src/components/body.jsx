@@ -12,7 +12,7 @@ import { CartContext } from "../contexts/cart.context";
 const Body = () => {
 
     //getting the contexts;
-    const{electronics,fashions,furnitures}= useContext(GetContext);
+    const{electronics}= useContext(GetContext);
 
     //importing cart context;
     const{addToCart}= useContext(CartContext);
@@ -41,9 +41,8 @@ const Body = () => {
             <Grid item>
                 <Button variant='outlined' sx={{margin:5}}>All Products</Button>
             </Grid>
-            <Grid item container 
+            <Grid item 
             sx={{display:'flex',justifyContent:'center'}}>
-                <Grid item>
                 {electronics && electronics.map(function(electronic){
                        const blob = new Blob([Int8Array.from(electronic.image.data.data)], {type: electronic.image.contentType });
 
@@ -71,64 +70,6 @@ const Body = () => {
                         )
                     })}
                     {!electronics && <Typography>Loading...</Typography>}
-                </Grid>
-                <Grid item>
-                {furnitures && furnitures.map((furniture)=>{
-                        const blob = new Blob([Int8Array.from(furniture.image.data.data)], {type: furniture.image.contentType });
-
-                        const image = window.URL.createObjectURL(blob);
-                        return(
-                            <Card elevation={5} spaceing={2} sx={{width:250,height:300,margin:3}} key={furniture.id}>
-                             <CardMedia
-                             component='img'
-                             height="150"
-                             image={image}
-                             alt='null'
-                             sx={{margin:1,objectFit:'contain'}}
-                             />   
-                            <CardContent>
-                                <Typography>{furniture.description}</Typography>
-                                <Typography>Ksh.{furniture.price}</Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                            <IconButton onClick={(item)=>addToCart(furniture)} >
-                                   <AddShoppingCartOutlinedIcon/>
-                               </IconButton>
-                            </CardActions>
-                        </Card>
-                        )}
-                    )}
-                        {!furnitures && <Typography>Loading...</Typography>}
-                </Grid>
-                <Grid item>
-                {fashions && fashions.map((fashion)=>{
-                        const blob = new Blob([Int8Array.from(fashion.image.data.data)], {type: fashion.image.contentType });
-
-                        const image = window.URL.createObjectURL(blob);
-                        return(
-                            <Card elevation={5} spaceing={2} sx={{width:250,height:300,margin:3}} key={fashion.id}>
-                             <CardMedia
-                             component="img"
-                             height="150"
-                             image={image}
-                             alt="image null"
-                             sx={{margin:1,objectFit:'contain'}}
-                             />     
-                            <CardContent>
-                                <Typography>{fashion.description}</Typography>
-                                <Typography>Ksh.{fashion.price}</Typography>
-                            </CardContent>
-                            <CardActions >
-                            <IconButton onClick={(item)=>addToCart(fashion)}>
-                                   <AddShoppingCartOutlinedIcon/>
-                               </IconButton>
-                            </CardActions>
-                        </Card>
-                        )
-                    }
-                    )}
-                    {!fashions && <Typography>Loading...</Typography>}
-                </Grid>
             </Grid>
             <Footer/>
         </Grid>
