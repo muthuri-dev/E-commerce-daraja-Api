@@ -22,7 +22,7 @@ const Payment = () => {
         .then((response)=>{
             if(response.status===200){
                 console.log(response);
-                alert('payment successful');
+                alert('input mpesa pin on your phone');
             }
         })
         .catch((err)=>{

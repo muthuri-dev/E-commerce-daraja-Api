@@ -32,7 +32,13 @@ const Dashboard = () => {
         formData.append('description',electrDescription);
         formData.append('price',electrprice);
         console.log([...formData]);
-        Axios.post('https://damaris-ecommerce.herokuapp.com/shop/electronics/',formData);
+        Axios.post('https://damaris-ecommerce.herokuapp.com/shop/electronics/',formData)
+        .then((response)=>{
+            if(response.status===200){
+                alert('product added');
+            }
+        })
+        .catch(error=>console.log(error.message));
 
         setElectronic(null);
         setElectrDescription('');
@@ -47,7 +53,7 @@ const Dashboard = () => {
                 </Grid>
                 <Grid item container direcrion='row'sx={{marginTop:4,justifyContent:'center'}} >
                     <Grid item>
-                        <Typography color='primary'sx={{marginTop:4}}>COMPUTERS & ELECTRONICS</Typography>
+                        <Typography color='primary'sx={{marginTop:4,fontFamily:'monospace'}}>FASHIONS</Typography>
                         <form>
                             <TextField
                                 variant="outlined"

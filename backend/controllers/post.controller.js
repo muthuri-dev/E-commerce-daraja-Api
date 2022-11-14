@@ -16,7 +16,7 @@ const axios = require('axios');
 const postElectronicsController = (req, res, next) => {
     const electronicAdd = new electronics({
         image: {
-            data: fs.readFileSync('uploads/' + req.file.filename),
+            data: fs.readFileSync(req.file.filename),
             contentType: 'image/png'
         },
         description: req.body.description,

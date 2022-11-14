@@ -41,8 +41,9 @@ const Body = () => {
             <Grid item>
                 <Button variant='outlined' sx={{margin:5}}>All Products</Button>
             </Grid>
-            <Grid item 
-            sx={{display:'flex',justifyContent:'center'}}>
+
+            <Grid item container
+            sx={{display:'flex',justifyContent:'center',}}>
                 {electronics && electronics.map(function(electronic){
                        const blob = new Blob([Int8Array.from(electronic.image.data.data)], {type: electronic.image.contentType });
 
