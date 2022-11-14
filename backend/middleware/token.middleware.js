@@ -22,7 +22,7 @@ const tokenMiddleware = async(req, res, next) => {
         })
         .catch((err) => {
             console.log(err.message);
-            res.status(err.statusCode).json(err.message);
+            res.json(err.message);
         })
 }
 

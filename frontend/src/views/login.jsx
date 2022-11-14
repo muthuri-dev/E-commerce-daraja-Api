@@ -17,24 +17,22 @@ const AdminLogin = () => {
     const handlePassword= function(e){
         setPassword(e.target.value);
     }
-    const handleSubmit = function(e){
+    const handleSubmit = async function(e){
         e.preventDefault();
         console.log({email, password});
         const admin=({
             email:email,
             password:password,
         })
-        axios.post('https://damaris-ecommerce.herokuapp.com/shop/login/',admin)
+        await axios.post('https://damaris-ecommerce.herokuapp.com/shop/login/',admin)
         .then(function(response){
             if(response.status===200){
                 alert('Successful');
                 navigate('/dashboard');
-            }else{
-                alert('Invalid email and password');
             }
         })
         .catch(function(err){
-            console.log('response error: ',err);
+            console.log('response error: ',err.message);
         })
     }
     return (

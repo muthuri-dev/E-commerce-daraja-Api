@@ -18,6 +18,7 @@ const getElectronicsController = async(req, res, next) => {
         })
         .catch((error) => {
             console.error(error.message);
+            res.status(error.status).json(error.message)
         });
     next();
 }

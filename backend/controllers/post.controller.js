@@ -38,6 +38,7 @@ const postStkController = async(req, res) => {
     const amount = req.body.amount;
     const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
     const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
+    //const url = "https: //sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query"
 
     const date = new Date();
     const timestamp =
@@ -71,7 +72,7 @@ const postStkController = async(req, res) => {
             },
         })
         .then((response) => {
-            console.log(response.data);
+            console.log(response.data.ResponseDescription);
             res.status(200).json(response.data.ResponseDescription);
         })
         .catch((err) => {
